@@ -14,10 +14,11 @@ SRC_DIR	= ./srcs
 INC_DIR	= ./includes
 OBJ_DIR	= ./obj
 
-SRCS	= ./srcs/*
+SRCS	= ./srcs/main.c ./srcs/error.c ./srcs/map_parser.c 
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 CC		= cc
-CFLAGS	= -Wextra -Wall -Werror -g
+CFLAGS	=
+tCFLAGS	= -Wextra -Wall -Werror -g
 INCLUDE	= -Llibft -lft -I$(INC_DIR)
 RM		= rm -rf
 LIBFT	= libft/libft.a
@@ -38,7 +39,7 @@ $(NAME):	$(OBJS) $(LIBFT)
 				@$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
 
 clean:	
-				$(RM) $(OBJS)
+				$(RM) $(OBJ_DIR)
 				make clean -C ./libft
 
 fclean:		clean
