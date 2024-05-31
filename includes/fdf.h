@@ -17,5 +17,6 @@ typedef struct s_fdf
 }			t_fdf;
 
 void	ft_error(char *str);
+void	ft_freemap(t_fdf *obj);
 void	map_init(t_fdf *obj, char *filename);
 #endif 

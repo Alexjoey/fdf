@@ -1,6 +1,7 @@
 #include "../includes/fdf.h"
+#include <fcntl.h>
 
-static int	map_getwidth(char *filename)
+static int	map_getheight(char *filename)
 {
 	int		width;
 	char	*line;
@@ -27,9 +28,9 @@ static int	map_getwidth(char *filename)
 	return (width);
 }
 
-static int	map_getheight(char *filename)
+static int	map_getwidth(char *filename)
 {
-	int		height;
+	int		width;
 	int		r;
 	char	*line;
 	int		fd;
@@ -39,14 +40,55 @@ static int	map_getheight(char *filename)
 		ft_error("open error");
 	line = gnl_nobuffer(fd);
 	r = -1;
-	height = 0;
+	width = 0;
 	while (line[++r])
 		if (line[r] != ' ' && (line[r + 1] == '\0' || line[r + 1] == ' '))
-			height++;
+			width++;
 	free (line);
 	if(close(fd) == -1)
 		ft_error("close error");
-	return (height);
+	return (width);
+}
+
+void fill_arrayline(int	*array, int width, char *line)
+{
+	int		i;
+	char	**splitarray;
+
+	i = -1;
+	splitarray = ft_split(line, ' ');
+	while (++i < width)
+	{
+		array[i] = ft_atoi(splitarray[i]);
+		free (splitarray[i]);
+	}
+	free (splitarray);
+}
+
+int	**map_initarray(int height, int width, char *filename)
+{
+	int		fd;
+	char	*line;
+	int		i;
+	int		**array;
+
+	array = malloc(sizeof(array) * height);
+	if (!array)
+		ft_error("malloc error");
+	fd = open(filename, O_RDONLY);
+	line = get_next_line(fd);
+	i = -1;
+	while (line && ++i < width)
+	{
+		array[i] = malloc(sizeof(int) * width);
+		fill_arrayline(array[i], width, line);
+		free (line);
+		line = get_next_line(fd);
+	}
+	free (line);
+	if (close(fd) == -1)
+		ft_error("close error");
+	return (array);
 }
 
 void	map_init(t_fdf *obj, char *filename)
@@ -58,4 +100,5 @@ void	map_init(t_fdf *obj, char *filename)
 		ft_error("malloc error");
 	obj->map->width = map_getwidth(filename);
 	obj->map->height = map_getheight(filename);
+	obj->map->array = map_initarray(obj->map->height, obj->map->width, filename);
 }
