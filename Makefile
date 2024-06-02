@@ -14,7 +14,7 @@ SRC_DIR	= ./srcs
 INC_DIR	= ./includes
 OBJ_DIR	= ./obj
 
-SRCS	= ./srcs/main.c ./srcs/error.c ./srcs/map_parser.c 
+SRCS	= ./srcs/main.c ./srcs/error.c ./srcs/map_parser.c ./srcs/hooks.c
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 CC		= cc
 CFLAGS	=

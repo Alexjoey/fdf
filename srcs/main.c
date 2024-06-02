@@ -1,4 +1,6 @@
 #include "../includes/fdf.h"
+#include <X11/Xlib.h>
+#include <X11/keysym.h>
 
 static t_fdf	*fdf_init(char *windowtitle)
 {
@@ -22,29 +24,15 @@ static t_fdf	*fdf_init(char *windowtitle)
 	return (obj);
 }
 
-int	ft_close_win(void	*var)
-{
-	t_fdf	*obj;
-
-	obj = (t_fdf *) var;
-
-	mlx_destroy_window(obj->mlx, obj->win);
-	mlx_destroy_image(obj->mlx, obj->img);
-	mlx_destroy_display(obj->mlx);
-	ft_freemap(obj->map);
-	free (obj->mlx);
-	free (obj);
-	exit (0);
-}
 int	main(int argc, char **argv)
 {
 	t_fdf	*obj;
-
+	
 	if (argc == 2)
 	{
 		obj = fdf_init(argv[1]);
 		map_init(obj, argv[1]);
-		mlx_hook(obj->win, 17 , 0, ft_close_win, obj);
+		ft_hooks(obj);
 		mlx_loop(obj->mlx);
 	}
 }
