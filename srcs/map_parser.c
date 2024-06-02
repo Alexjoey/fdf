@@ -57,7 +57,7 @@ void fill_arrayline(int	*array, int width, char *line)
 
 	i = -1;
 	splitarray = ft_split(line, ' ');
-	while (++i < width)
+	while (++i < width && splitarray[i])
 	{
 		array[i] = ft_atoi(splitarray[i]);
 		free (splitarray[i]);
