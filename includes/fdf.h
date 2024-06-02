@@ -5,14 +5,8 @@
 # include <fcntl.h>
 # include "../mlx/mlx.h"
 
-typedef struct s_data
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
+# define WINDOWWIDTH 1920
+# define WINDOWHEIGHT 1080
 
 typedef struct s_map
 {
@@ -24,9 +18,16 @@ typedef struct s_map
 typedef struct s_fdf
 {
 	t_map	*map;
+	void	*mlx;
+	void	*win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_len;
+	int		endian;
 }			t_fdf;
 
 void	ft_error(char *str);
-void	ft_freemap(t_fdf *obj);
+void	ft_freemap(t_map *map);
 void	map_init(t_fdf *obj, char *filename);
 #endif 
