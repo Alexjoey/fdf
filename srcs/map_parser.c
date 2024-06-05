@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parser.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amylle <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/03 15:08:36 by amylle            #+#    #+#             */
+/*   Updated: 2024/06/03 15:08:38 by amylle           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/fdf.h"
 #include <fcntl.h>
 
@@ -58,11 +70,10 @@ void fill_arrayline(int	*array, int width, char *line)
 	i = -1;
 	splitarray = ft_split(line, ' ');
 	while (++i < width && splitarray[i])
-	{
 		array[i] = ft_atoi(splitarray[i]);
-		free (splitarray[i]);
-	}
-	free (splitarray);
+	ft_freestrarray(splitarray);
+	if (i != width)
+		ft_error("map input error");
 }
 
 int	**map_initarray(int height, int width, char *filename)
@@ -78,7 +89,7 @@ int	**map_initarray(int height, int width, char *filename)
 	fd = open(filename, O_RDONLY);
 	line = get_next_line(fd);
 	i = -1;
-	while (line && ++i < width)
+	while (line && ++i < height)
 	{
 		array[i] = malloc(sizeof(int) * width);
 		fill_arrayline(array[i], width, line);

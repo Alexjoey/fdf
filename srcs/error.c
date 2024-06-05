@@ -16,3 +16,13 @@ void	ft_freemap(t_map *map)
 	free (map->array);
 	free (map);
 }
+
+void	ft_freestrarray(char **strarray)
+{
+	int	i;
+
+	i = -1;
+	while (strarray[++i])
+		free (strarray[i]);
+	free (strarray);
+}
