@@ -7,7 +7,16 @@
 
 # define WINDOWWIDTH 1920
 # define WINDOWHEIGHT 1080
-# define ESCAPE 9
+# define X_ANGLE -0.61547290
+# define Y_ANGLE -0.523599
+# define Z_ANGLE 0.61547290
+
+typedef struct s_point
+{
+	int x;
+	int y;
+	int color;
+}		t_point;
 
 typedef struct s_map
 {
@@ -26,6 +35,7 @@ typedef struct s_fdf
 	int		bits_per_pixel;
 	int		line_len;
 	int		endian;
+	int		camera_zoom;
 }			t_fdf;
 
 void	ft_error(char *str);
@@ -34,4 +44,5 @@ void	map_init(t_fdf *obj, char *filename);
 void	ft_hooks(t_fdf *obj);
 void	ft_freestrarray(char **strarray);
 void	ft_drawmap(t_fdf *obj);
+
 #endif 
