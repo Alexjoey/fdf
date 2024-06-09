@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <X11/Xlib.h>
-#include <X11/keysym.h>
 
 static t_fdf	*fdf_init(char *windowtitle)
 {
@@ -30,7 +28,7 @@ static t_fdf	*fdf_init(char *windowtitle)
 	obj->img = mlx_new_image(obj->mlx, WINDOWWIDTH, WINDOWHEIGHT);
 	if (!obj->img)
 		ft_error("img malloc error");
-	obj->addr = mlx_get_data_addr(obj->mlx, &obj->bits_per_pixel, &obj->line_len, &obj->endian);
+	obj->addr = mlx_get_data_addr(obj->img, &obj->bits_per_pixel, &obj->line_len, &obj->endian);
 	if (!obj->addr)
 		ft_error("data adress init error");
 	return (obj);
@@ -50,6 +48,7 @@ void	printintarray(t_map *map)
 		ft_printf("\n");
 	}
 }
+
 int	main(int argc, char **argv)
 {
 	t_fdf	*obj;
@@ -61,6 +60,7 @@ int	main(int argc, char **argv)
 		printintarray(obj->map);
 		ft_drawmap(obj);
 		ft_hooks(obj);
+		mlx_put_image_to_window(obj->mlx, obj->win, obj->img, 0, 0);
 		mlx_loop(obj->mlx);
 	}
 }
@@ -68,7 +68,26 @@ int	main(int argc, char **argv)
 void	my_pixel_put(t_fdf *obj, int x, int y, int color)
 {
 	char *dst;
-
-	dst = obj->addr + (y *obj->line_len + x * (obj->bits_per_pixel / 8));
+	long	i;
+	
+	if (x < 0 || x > WINDOWWIDTH || y < 0 || y > WINDOWHEIGHT)
+		return ;
+	i = y * obj->line_len + x * (obj->bits_per_pixel / 8);
+	dst = obj->addr + (y * obj->line_len + x * (obj->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
+/*
+int	main(void)
+{
+	t_fdf	*obj;
+	int	i = 0;	
+	obj = ft_calloc(1, (sizeof(t_fdf)));
+	obj->mlx = mlx_init();
+	obj->win = mlx_new_window(obj->mlx, 1920, 1080, "Hello world!");
+	obj->img = mlx_new_image(obj->mlx, 1920, 1080);
+	obj->addr = mlx_get_data_addr(obj->img, &obj->bits_per_pixel, &obj->line_len, &obj->endian);
+	my_pixel_put(obj, i + 5, i + 5, 0x00FF0000);
+	mlx_put_image_to_window(obj->mlx, obj->win, obj->img, 0, 0);
+	ft_printf("yo\n");
+	mlx_loop(obj->mlx);
+}*/

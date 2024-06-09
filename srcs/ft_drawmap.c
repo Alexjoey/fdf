@@ -23,6 +23,7 @@ void	ft_drawmap(t_fdf *obj)
 {
 	int	x;
 	int	y;
+	t_point	point;
 
 	y = -1;
 	obj->camera_zoom = ft_min((WINDOWWIDTH / obj->map->width / 2), (WINDOWHEIGHT / obj->map->height / 2));
@@ -30,11 +31,13 @@ void	ft_drawmap(t_fdf *obj)
 	{
 		x = -1;
 		while (++x < obj->map->width)
-		{
+		{/*
 			if (y != obj->map->height - 1)
 				ft_draw_line(project(x, y, obj), project(x, y + 1, obj), obj);
 			if (x != obj->map->width - 1)
-				ft_draw_line(project(x, y), project(x + 1, y), obj);
+				ft_draw_line(project(x, y), project(x + 1, y), obj);*/
+			point = project(x, y, obj);
+			my_pixel_put(obj, point.x, point.y, 0x00FFFFFF);
 		}
 	}
 }

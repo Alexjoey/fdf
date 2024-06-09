@@ -20,7 +20,7 @@ static void ft_rotate_x_axis(int *y, int *z)
 	temp_y = *y;
 
 	*y = temp_y * cos(X_ANGLE) + *z * sin(X_ANGLE);
-	*y = temp_y * -sin(X_ANGLE) + *z * cos(X_ANGLE);
+	*z = temp_y * -sin(X_ANGLE) + *z * cos(X_ANGLE);
 }
 
 static void	ft_rotate_y_axis(int *x, int *z)
@@ -49,12 +49,13 @@ t_point	project(int x, int y, t_fdf *obj)
 	int	z;
 
 	z = obj->map->array[y][x] * obj->camera_zoom;
-	point.y = (y - WINDOWWIDTH / 2) * obj->camera_zoom;
-	point.x = (x - WINDOWHEIGHT / 2) * obj->camera_zoom;
+	point.y = (y - obj->map->height / 2) * obj->camera_zoom;
+	point.x = (x - obj->map->width / 2) * obj->camera_zoom;
 	ft_rotate_x_axis(&point.y , &z);
 	ft_rotate_y_axis(&point.x , &z);
 	ft_rotate_z_axis(&point.x , &point.y);
 	point.x += WINDOWWIDTH / 2;
-	point.y += (WINDOWHEIGHT + obj->map->height / 2 * obj->camera_zoom ) / 2;
+	point.y += (WINDOWHEIGHT + obj->map->height / 2 * obj->camera_zoom) / 2;
+	ft_printf("x is: %i y is: %i\n", point.x, point.y);
 	return (point);
 }
