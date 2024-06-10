@@ -57,12 +57,12 @@ static int	map_getwidth(char *filename)
 		if (line[r] != ' ' && (line[r + 1] == '\0' || line[r + 1] == ' '))
 			width++;
 	free (line);
-	if(close(fd) == -1)
+	if (close(fd) == -1)
 		ft_error("close error");
 	return (width);
 }
 
-void fill_arrayline(int	*array, int width, char *line)
+void	fill_arrayline(int	*array, int width, char *line)
 {
 	int		i;
 	char	**splitarray;
@@ -76,7 +76,7 @@ void fill_arrayline(int	*array, int width, char *line)
 		ft_error("map input error");
 }
 
-int	**map_initarray(int height, int width, char *filename)
+int	**initarray(int height, int width, char *filename)
 {
 	int		fd;
 	char	*line;
@@ -109,5 +109,5 @@ void	map_init(t_fdf *obj, char *filename)
 		ft_error("malloc error");
 	obj->map->width = map_getwidth(filename);
 	obj->map->height = map_getheight(filename);
-	obj->map->array = map_initarray(obj->map->height, obj->map->width, filename);
+	obj->map->array = initarray(obj->map->height, obj->map->width, filename);
 }

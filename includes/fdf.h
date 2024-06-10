@@ -17,11 +17,21 @@
 # include <fcntl.h>
 # include "../mlx/mlx.h"
 
-# define WINDOWWIDTH 1920
-# define WINDOWHEIGHT 1080
+# define WINDOWWIDTH 800
+# define WINDOWHEIGHT 600
 # define X_ANGLE -0.61547290
 # define Y_ANGLE -0.523599
 # define Z_ANGLE 0.61547290
+
+typedef struct s_lineargs
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	err2;
+}		t_lineargs;
 
 typedef struct s_point
 {
@@ -44,7 +54,7 @@ typedef struct s_fdf
 	void	*win;
 	void	*img;
 	char	*addr;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_len;
 	int		endian;
 	int		camera_zoom;

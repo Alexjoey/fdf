@@ -25,7 +25,8 @@ void	ft_drawmap(t_fdf *obj)
 	int	y;
 
 	y = -1;
-	obj->camera_zoom = ft_min((WINDOWWIDTH / obj->map->width / 2), (WINDOWHEIGHT / obj->map->height / 2));
+	obj->camera_zoom = ft_min((WINDOWWIDTH / obj->map->width / 2), \
+								(WINDOWHEIGHT / obj->map->height / 2));
 	while (++y < obj->map->height)
 	{
 		x = -1;
