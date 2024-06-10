@@ -93,5 +93,5 @@ int	ft_atoi_base(char *num, char *base)
 			if (base[j] == num[i])
 				ret += j * (pow(ft_strlen(base), ft_strlen(num) - i - 1));
 	}
-	return (ret);	
+	return (ret);
 }
