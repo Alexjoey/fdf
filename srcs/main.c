@@ -68,11 +68,9 @@ int	main(int argc, char **argv)
 void	my_pixel_put(t_fdf *obj, int x, int y, int color)
 {
 	char *dst;
-	long	i;
-	
+
 	if (x < 0 || x > WINDOWWIDTH || y < 0 || y > WINDOWHEIGHT)
 		return ;
-	i = y * obj->line_len + x * (obj->bits_per_pixel / 8);
 	dst = obj->addr + (y * obj->line_len + x * (obj->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }

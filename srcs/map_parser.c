@@ -104,8 +104,6 @@ int	**map_initarray(int height, int width, char *filename)
 
 void	map_init(t_fdf *obj, char *filename)
 {
-	int	fd;
-
 	obj->map = ft_calloc(1, sizeof(*obj->map));
 	if (!obj->map)
 		ft_error("malloc error");

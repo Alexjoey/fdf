@@ -14,11 +14,10 @@ SRC_DIR	= ./srcs
 INC_DIR	= ./includes
 OBJ_DIR	= ./obj
 
-SRCS	= ./srcs/main.c ./srcs/error.c ./srcs/map_parser.c ./srcs/hooks.c ./srcs/ft_drawmap.c ./srcs/ft_project.c
+SRCS	= ./srcs/main.c ./srcs/error.c ./srcs/map_parser.c ./srcs/hooks.c ./srcs/ft_drawmap.c ./srcs/ft_project.c ./srcs/ft_drawline.c
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 CC		= cc
-CFLAGS	=
-tCFLAGS	= -Wextra -Wall -Werror -g
+CFLAGS	= -Wextra -Wall -Werror -g
 INCLUDE	= -Llibft -lft -I$(INC_DIR) -Lmlx -lmlx_Linux -L/usr/lib -Imlx -lXext -lX11 -lm -lz
 RM		= rm -rf
 LIBFT	= libft/libft.a
