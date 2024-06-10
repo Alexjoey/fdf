@@ -45,6 +45,8 @@ typedef struct s_map
 	int	***array;
 	int	width;
 	int	height;
+	int	min;
+	int	max;
 }		t_map;
 
 typedef struct s_fdf
@@ -70,5 +72,6 @@ void	ft_drawmap(t_fdf *obj);
 void	ft_draw_line(t_point start, t_point end, t_fdf *obj);
 t_point	project(int x, int y, t_fdf *obj);
 int		ft_atoi_base(char *num, char *base);
+void	get_minmax(t_map *map);
 
 #endif 

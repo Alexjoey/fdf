@@ -42,11 +42,29 @@ static void	ft_rotate_z_axis(int *x, int *y)
 	*y = temp_x * sin(Z_ANGLE) + temp_y * cos(Z_ANGLE);
 }
 
+int	get_defaultcolors(int z, t_fdf *obj)
+{
+	double	percent;
+	int		dz;
+
+	dz = obj->map->max - obj->map->min;
+	if (dz == 0)
+		return (0xFFFFFF);
+	percent = (double)(obj->map->min - z) / dz;
+	if (percent > 0.5)
+		return (0xFFFFFF / 2);
+	return (0);
+}
+
 t_point	project(int x, int y, t_fdf *obj)
 {
 	t_point	point;
 	int		z;
 
+	if (obj->map->array[y][x][1] >= 0)
+		point.color = obj->map->array[y][x][1];
+	else
+		point.color = get_defaultcolors(obj->map->array[y][x][0], obj);
 	z = obj->map->array[y][x][0] * obj->camera_zoom;
 	point.y = (y - obj->map->height / 2) * obj->camera_zoom;
 	point.x = (x - obj->map->width / 2) * obj->camera_zoom;

@@ -124,4 +124,5 @@ void	map_init(t_fdf *obj, char *filename)
 	obj->map->width = map_getwidth(filename);
 	obj->map->height = map_getheight(filename);
 	obj->map->array = initarray(obj->map->height, obj->map->width, filename);
+	get_minmax(obj->map);
 }
