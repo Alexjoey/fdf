@@ -47,7 +47,7 @@ t_point	project(int x, int y, t_fdf *obj)
 	t_point	point;
 	int		z;
 
-	z = obj->map->array[y][x] * obj->camera_zoom;
+	z = obj->map->array[y][x][0] * obj->camera_zoom;
 	point.y = (y - obj->map->height / 2) * obj->camera_zoom;
 	point.x = (x - obj->map->width / 2) * obj->camera_zoom;
 	ft_rotate_x_axis(&point.y, &z);

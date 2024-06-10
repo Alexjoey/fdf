@@ -62,26 +62,40 @@ static int	map_getwidth(char *filename)
 	return (width);
 }
 
-void	fill_arrayline(int	*array, int width, char *line)
+void	fill_arrayline(int	**array, int width, char *line)
 {
 	int		i;
+	int		j;
 	char	**splitarray;
 
 	i = -1;
 	splitarray = ft_split(line, ' ');
 	while (++i < width && splitarray[i])
-		array[i] = ft_atoi(splitarray[i]);
+	{
+		array[i] = malloc(sizeof(int) * 2);
+		array[i][0] = ft_atoi(splitarray[i]);
+		j = 0;
+		while (splitarray[i][j] && splitarray[i][j] != ',')
+			j++;
+		if (splitarray[i][j] == ',')
+		{
+			j += 3;
+			array[i][1] = ft_atoi_base(&splitarray[i][j], "0123456789ABCDEF");
+		}
+		else
+			array[i][1] = -1;
+	}
 	ft_freestrarray(splitarray);
 	if (i != width)
 		ft_error("map input error");
 }
 
-int	**initarray(int height, int width, char *filename)
+int	***initarray(int height, int width, char *filename)
 {
 	int		fd;
 	char	*line;
 	int		i;
-	int		**array;
+	int		***array;
 
 	array = malloc(sizeof(array) * height);
 	if (!array)
@@ -91,7 +105,7 @@ int	**initarray(int height, int width, char *filename)
 	i = -1;
 	while (line && ++i < height)
 	{
-		array[i] = malloc(sizeof(int) * width);
+		array[i] = malloc(sizeof(*array) * width);
 		fill_arrayline(array[i], width, line);
 		free (line);
 		line = get_next_line(fd);

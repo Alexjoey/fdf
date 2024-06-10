@@ -42,7 +42,7 @@ typedef struct s_point
 
 typedef struct s_map
 {
-	int	**array;
+	int	***array;
 	int	width;
 	int	height;
 }		t_map;
@@ -69,5 +69,6 @@ void	ft_freestrarray(char **strarray);
 void	ft_drawmap(t_fdf *obj);
 void	ft_draw_line(t_point start, t_point end, t_fdf *obj);
 t_point	project(int x, int y, t_fdf *obj);
+int		ft_atoi_base(char *num, char *base);
 
 #endif 

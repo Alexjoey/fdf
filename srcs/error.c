@@ -20,11 +20,17 @@ void	ft_error(char *str)
 
 void	ft_freemap(t_map *map)
 {
-	int	i;
+	int	y;
+	int	x;
 
-	i = -1;
-	while (++i < map->height)
-		free (map->array[i]);
+	y = -1;
+	while (++y < map->height)
+	{
+		x = -1;
+		while (++x < map->width)
+			free (map->array[y][x]);
+		free (map->array[y]);
+	}
 	free (map->array);
 	free (map);
 }

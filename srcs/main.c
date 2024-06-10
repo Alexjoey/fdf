@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <math.h>
 
 static t_fdf	*fdf_init(char *windowtitle)
 {
@@ -75,4 +76,22 @@ void	my_pixel_put(t_fdf *obj, int x, int y, int color)
 		return ;
 	dst = obj->addr + (y * obj->line_len + x * (obj->bpp / 8));
 	*(unsigned int *)dst = color;
+}
+
+int	ft_atoi_base(char *num, char *base)
+{
+	int	ret;
+	int	i;
+	int	j;
+
+	ret = 0;
+	i = ft_strlen(num);
+	while (--i >= 0)
+	{
+		j = -1;
+		while (base[++j])
+			if (base[j] == num[i])
+				ret += j * (pow(ft_strlen(base), ft_strlen(num) - i - 1));
+	}
+	return (ret);	
 }
