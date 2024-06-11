@@ -36,3 +36,48 @@ void	get_minmax(t_map *map)
 	map->max = max;
 	map->min = min;
 }
+
+void	printintarray(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i < map->height)
+	{
+		j = -1;
+		while (++j < map->width)
+			ft_printf("%i ", map->array[i][j]);
+		ft_printf("\n");
+	}
+}
+
+void	my_pixel_put(t_fdf *obj, int x, int y, int color)
+{
+	char	*dst;
+
+	if (x < 0 || x > WINDOWWIDTH || y < 0 || y > WINDOWHEIGHT)
+		return ;
+	dst = obj->addr + (y * obj->line_len + x * (obj->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
+int	ft_atoi_base(char *num, char *base)
+{
+	int	ret;
+	int	i;
+	int	j;
+	int	baselen;
+
+	baselen = ft_strlen(base);
+	ret = 0;
+	i = -1;
+	while (num[++i])
+	{
+		j = -1;
+		while (base[++j])
+			if (base[j] == num[i])
+				ret += ret * baselen + j;
+	}
+	return (ret);
+}

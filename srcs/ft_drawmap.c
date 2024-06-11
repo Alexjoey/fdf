@@ -12,24 +12,17 @@
 
 #include "../includes/fdf.h"
 
-int	ft_min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
-
 void	ft_drawmap(t_fdf *obj)
 {
 	int	x;
 	int	y;
 
-	y = -1;
 	obj->camera_zoom = ft_min((WINDOWWIDTH / obj->map->width / 2), \
 							WINDOWHEIGHT / obj->map->height / 2);
 	if (obj->map->max - obj->map->min != 0)
 		obj->camera_zoom = ft_min(obj->camera_zoom, \
 			WINDOWHEIGHT / (obj->map->max - obj->map->min));
+	y = -1;
 	while (++y < obj->map->height)
 	{
 		x = -1;

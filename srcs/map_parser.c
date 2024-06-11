@@ -61,6 +61,7 @@ static int	map_getwidth(char *filename)
 	return (width);
 }
 
+//fill line with values, in [0] z value, in [1] the color if given
 void	fill_arrayline(int	**array, int width, char *line)
 {
 	int		i;

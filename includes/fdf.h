@@ -74,5 +74,7 @@ void	ft_draw_line(t_point start, t_point end, t_fdf *obj);
 t_point	project(int x, int y, t_fdf *obj);
 int		ft_atoi_base(char *num, char *base);
 void	get_minmax(t_map *map);
+int		ft_atoi_base(char *num, char *base);
+void	printintarray(t_map *map);
 
 #endif 
