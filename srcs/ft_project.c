@@ -50,10 +50,24 @@ int	get_defaultcolors(int z, t_fdf *obj)
 	dz = obj->map->max - obj->map->min;
 	if (dz == 0)
 		return (0xFFFFFF);
-	percent = (double)(obj->map->min - z) / dz;
+	percent = (double)(obj->map->min - z) / dz * -1;
+	if (percent > 0.9)
+		return (0xE308E7);
+	if (percent > 0.8)
+		return (0x7823EA);
+	if (percent > 0.7)
+		return (0x495CE2);
+	if (percent > 0.6)
+		return (0x6CB9DD);
 	if (percent > 0.5)
-		return (0xFFFFFF / 2);
-	return (0);
+		return (0x8DDBC9);
+	if (percent > 0.4)
+		return (0xAADCB5);
+	if (percent > 0.3)
+		return (0xCDE0C4);
+	if (percent > 0.2)
+		return (0xE6E7DB);
+	return (0xFFFFFF);
 }
 
 t_point	project(int x, int y, t_fdf *obj)

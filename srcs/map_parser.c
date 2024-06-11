@@ -15,29 +15,25 @@
 
 static int	map_getheight(char *filename)
 {
-	int		width;
+	int		height;
 	char	*line;
-	int		i;
 	int		fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		ft_error("open error");
-	width = 0;
+	height = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		i = -1;
-		while (line[++i])
-			if (line[i] == '\n')
-				width++;
+		height++;
 		free (line);
 		line = get_next_line(fd);
 	}
 	free (line);
 	if (close(fd) == -1)
 		ft_error("close error");
-	return (width);
+	return (height);
 }
 
 static int	map_getwidth(char *filename)
@@ -53,8 +49,11 @@ static int	map_getwidth(char *filename)
 	line = gnl_nobuffer(fd);
 	r = -1;
 	width = 0;
+	if (line[++r] != ' ')
+		width++;
 	while (line[++r])
-		if (line[r] != ' ' && (line[r + 1] == '\0' || line[r + 1] == ' '))
+		if (line[r] != ' ' && line[r] != '\n' && \
+			(line[r - 1] == '\0' || line[r - 1] == ' '))
 			width++;
 	free (line);
 	if (close(fd) == -1)

@@ -6,7 +6,7 @@
 /*   By: amylle <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 13:41:43 by amylle            #+#    #+#             */
-/*   Updated: 2024/06/05 13:42:06 by amylle           ###   ########.fr       */
+/*   Updated: 2024/06/11 12:27:16 by amylle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,30 @@
 # include "../libft/inc/libft.h"
 # include <fcntl.h>
 # include "../mlx/mlx.h"
-
-# define WINDOWWIDTH 800
-# define WINDOWHEIGHT 600
-# define X_ANGLE -0.61547290
+# include <math.h>
+# define WINDOWWIDTH 1920
+# define WINDOWHEIGHT 1080
+# define X_ANGLE -0.615472907
 # define Y_ANGLE -0.523599
-# define Z_ANGLE 0.61547290
-
-typedef struct s_lineargs
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	err2;
-}		t_lineargs;
+# define Z_ANGLE 0.615472907
 
 typedef struct s_point
 {
-	int x;
-	int y;
-	int color;
+	int	x;
+	int	y;
+	int	color;
 }		t_point;
+
+typedef struct s_lineargs
+{
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+	int		err2;
+	t_point	curr;
+}			t_lineargs;
 
 typedef struct s_map
 {

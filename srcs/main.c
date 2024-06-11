@@ -83,15 +83,17 @@ int	ft_atoi_base(char *num, char *base)
 	int	ret;
 	int	i;
 	int	j;
+	int	baselen;
 
+	baselen = ft_strlen(base);
 	ret = 0;
-	i = ft_strlen(num);
-	while (--i >= 0)
+	i = -1;
+	while (num[++i])
 	{
 		j = -1;
 		while (base[++j])
 			if (base[j] == num[i])
-				ret += j * (pow(ft_strlen(base), ft_strlen(num) - i - 1));
+				ret += ret * baselen + j;
 	}
 	return (ret);
 }
