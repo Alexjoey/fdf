@@ -22,6 +22,7 @@ INCLUDE	= -Llibft -lft -I$(INC_DIR) -Lmlx -lmlx_Linux -L/usr/lib -Imlx -lXext -l
 RM		= rm -rf
 LIBFT	= libft/libft.a
 MAKEFLAGS += --no-print-directory
+MLX		= mlx/mlx_linux.a
 NAME	= fdf
 
 #---------------------------Messages--------------------------------------------
@@ -44,7 +45,10 @@ $(OBJ_DIR)/%.o: %.c
 $(LIBFT):
 		@make -C ./libft
 
-$(NAME):	$(OBJS) $(LIBFT)
+$(MLX):
+		@make -C ./mlx
+
+$(NAME):	$(OBJS) $(LIBFT) $(MLX)
 				@echo Compiling $(NAME)
 				@$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
 
@@ -57,5 +61,6 @@ fclean:
 				@echo "$(BOLD_YELLOW)Removing binaries"
 				$(RM) $(NAME) $(OBJ_DIR)
 				@make fclean -C ./libft
+				@make clean -C ./mlx
 
 re:			fclean all
