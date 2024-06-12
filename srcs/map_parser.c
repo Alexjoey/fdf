@@ -73,15 +73,15 @@ void	fill_arrayline(int	**array, int width, char *line)
 	while (++i < width && splitarray[i])
 	{
 		array[i] = malloc(sizeof(int) * 2);
+		if (!array)
+			ft_error("malloc error");
 		array[i][0] = ft_atoi(splitarray[i]);
 		j = 0;
 		while (splitarray[i][j] && splitarray[i][j] != ',')
 			j++;
 		if (splitarray[i][j] == ',')
-		{
-			j += 3;
-			array[i][1] = ft_atoi_base(&splitarray[i][j], "0123456789ABCDEF");
-		}
+			array[i][1] = ft_atoi_base(&splitarray[i][j + 3], \
+										"0123456789ABCDEF");
 		else
 			array[i][1] = -1;
 	}
@@ -125,4 +125,9 @@ void	map_init(t_fdf *obj, char *filename)
 	obj->map->height = map_getheight(filename);
 	obj->map->array = initarray(obj->map->height, obj->map->width, filename);
 	get_minmax(obj->map);
+	obj->camera_zoom = ft_min((WINDOWWIDTH / obj->map->width / 2), \
+							WINDOWHEIGHT / obj->map->height / 2);
+	if (obj->map->max - obj->map->min != 0)
+		obj->camera_zoom = ft_min(obj->camera_zoom, \
+			WINDOWHEIGHT / (obj->map->max - obj->map->min));
 }

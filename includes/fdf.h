@@ -19,9 +19,6 @@
 # include <math.h>
 # define WINDOWWIDTH 1920
 # define WINDOWHEIGHT 1080
-# define X_ANGLE -0.615472907
-# define Y_ANGLE -0.523599
-# define Z_ANGLE 0.615472907
 
 typedef struct s_point
 {
@@ -61,6 +58,11 @@ typedef struct s_fdf
 	int		line_len;
 	int		endian;
 	int		camera_zoom;
+	int		x_offset;
+	int		y_offset;
+	double	x_angle;
+	double	y_angle;
+	double	z_angle;
 }			t_fdf;
 
 void	ft_error(char *str);
@@ -76,5 +78,8 @@ int		ft_atoi_base(char *num, char *base);
 void	get_minmax(t_map *map);
 int		ft_atoi_base(char *num, char *base);
 void	printintarray(t_map *map);
+void	ft_put_new_img(t_fdf *obj);
+int		ft_keypress(int keycode, void *param);
+int		ft_close_win(void *param);
 
 #endif 

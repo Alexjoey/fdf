@@ -12,6 +12,15 @@
 
 #include "../includes/fdf.h"
 
+void	ft_put_new_img(t_fdf *obj)
+{
+	mlx_destroy_image(obj->mlx, obj->img);
+	obj->img = mlx_new_image(obj->mlx, WINDOWWIDTH, WINDOWHEIGHT);
+	mlx_clear_window(obj->mlx, obj->win);
+	mlx_put_image_to_window(obj->mlx, obj->win, obj->img, 0, 0);
+	ft_drawmap(obj);
+}
+
 void	get_minmax(t_map *map)
 {
 	int	min;
